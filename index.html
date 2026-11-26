@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="AI HealthMate provides general health and skin wellness education.">
+<title>AI HealthMate — Health &amp; Skin Wellness</title>
+<style>
+:root{--navy:#17365d;--blue:#2767b1;--pale:#eef5ff;--ink:#172334;--muted:#617087;--line:#dce5ef;--bg:#f7f9fc;--white:#fff}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.5}
+header{background:linear-gradient(120deg,#122d50,#2866a8);color:white;padding:28px 18px 38px}
+.wrap{max-width:980px;margin:auto;padding:0 16px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{font-weight:800;font-size:1.25rem;letter-spacing:.2px}.pill{border:1px solid #ffffff66;border-radius:999px;padding:5px 10px;font-size:.78rem}
+h1{font-size:clamp(2rem,5vw,3.2rem);line-height:1.08;margin:34px 0 12px;max-width:700px}
+header p{color:#e4efff;max-width:650px;margin:0}
+main{padding:24px 0 50px}.notice{background:#fff8e8;border:1px solid #f1d9a6;color:#684b12;padding:13px 15px;border-radius:13px;font-size:.92rem;margin-bottom:20px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.card{background:var(--white);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:0 5px 18px #18385a0a}
+.card h2{font-size:1.15rem;margin:0 0 7px}.sub{color:var(--muted);font-size:.92rem;margin:0 0 16px}
+label{display:block;font-weight:650;font-size:.92rem;margin:13px 0 6px}
+input,select,textarea{width:100%;padding:11px 12px;border:1px solid #cbd7e4;border-radius:10px;font:inherit;background:white;color:var(--ink)}
+button{border:0;background:var(--blue);color:white;font-weight:700;border-radius:10px;padding:11px 16px;font:inherit;cursor:pointer;margin-top:13px}
+button.secondary{background:#eaf1fa;color:var(--navy)}button:focus,input:focus,select:focus,textarea:focus{outline:3px solid #8bbcff66;outline-offset:1px}
+#preview{display:none;width:100%;max-height:280px;object-fit:contain;border:1px solid var(--line);border-radius:12px;margin-top:12px;background:#f5f7fa}
+.result{display:none;background:var(--pale);border:1px solid #d5e5fb;border-radius:12px;padding:13px;margin-top:14px}
+.result h3{margin:0 0 6px;font-size:1rem}.result p{margin:5px 0}
+.small{font-size:.82rem;color:var(--muted)}.full{grid-column:1/-1}
+footer{padding:22px 16px;background:#102947;color:#d9e7f7;font-size:.86rem}
+ul{padding-left:20px;margin:8px 0}
+@media(max-width:680px){.grid{grid-template-columns:1fr}.full{grid-column:auto}.top{align-items:flex-start;flex-direction:column}}
+</style>
+</head>
+<body>
+<header>
+ <div class="wrap">
+  <div class="top"><div class="brand">✚ AI HealthMate</div><span class="pill">Free wellness companion</span></div>
+  <h1>Your health questions, made easier.</h1>
+  <p>Explore skin-care education, everyday wellness information and simple health tools — in one place.</p>
+ </div>
+</header>
+<main class="wrap">
+ <div class="notice"><strong>Important:</strong> This website is an educational demo, not a medical service. A face photo cannot reveal internal health, vitamin levels, disease, body-fat level or whether surgery is needed. It does not diagnose or prescribe treatment.</div>
+ <div class="grid">
+  <section class="card">
+   <h2>📷 Skin photo preview</h2>
+   <p class="sub">Choose a photo to preview it on this device. This demo does not upload or analyse your image.</p>
+   <label for="photo">Choose a face or skin photo</label>
+   <input id="photo" type="file" accept="image/*">
+   <img id="preview" alt="Your selected photo preview">
+   <p class="small">Privacy: the preview is handled locally in your browser. Avoid uploading photos of other people without their permission.</p>
+   <div class="result" id="photoNote"><strong>Photo ready.</strong><p>For any new, changing, painful or worrying skin concern, consult a qualified healthcare professional. A photo alone cannot confirm what it is.</p></div>
+  </section>
+  <section class="card">
+   <h2>🩺 General health check-in</h2>
+   <p class="sub">Share what you want help understanding. This gives general information only.</p>
+   <label for="topic">What would you like information about?</label>
+   <select id="topic">
+    <option value="">Select a topic</option><option>Skin irritation or acne</option><option>Sleep and daily routine</option><option>Healthy eating</option><option>Stress and wellbeing</option><option>Exercise and movement</option><option>General health question</option>
+   </select>
+   <label for="details">Describe your question (optional)</label>
+   <textarea id="details" rows="3" placeholder="Write a short description. Do not include private identifying details."></textarea>
+   <button id="guidanceBtn">Get general guidance</button>
+   <div class="result" id="guidance"></div>
+  </section>
+  <section class="card">
+   <h2>🧮 BMI calculator (adults only)</h2>
+   <p class="sub">For adults aged 20 or older. BMI is a rough screening measure, not a diagnosis or a judgement of health.</p>
+   <label for="age">Age</label><input id="age" type="number" min="1" max="120" placeholder="Enter age in years">
+   <label for="height">Height (cm)</label><input id="height" type="number" min="50" max="250" placeholder="e.g. 170">
+   <label for="weight">Weight (kg)</label><input id="weight" type="number" min="10" max="400" placeholder="e.g. 65">
+   <button id="bmiBtn">Calculate BMI</button>
+   <div class="result" id="bmiResult" aria-live="polite"></div>
+   <p class="small">For children and teenagers, adult BMI categories do not apply. Ask a healthcare professional for age-appropriate assessment. This tool will not recommend weight loss.</p>
+  </section>
+  <section class="card">
+   <h2>🌿 Everyday wellness</h2>
+   <p class="sub">Small, general habits that support wellbeing.</p>
+   <ul>
+    <li>Eat a variety of foods and drink water regularly.</li>
+    <li>Keep a consistent sleep routine where possible.</li>
+    <li>Choose movement that feels comfortable and accessible.</li>
+    <li>Use sun protection and gentle skin-care products if suitable.</li>
+    <li>Seek professional advice for persistent or concerning symptoms.</li>
+   </ul>
+   <p class="small">There is no single routine that is right for everyone.</p>
+  </section>
+  <section class="card full">
+   <h2>🚑 When to get medical help</h2>
+   <p class="sub">If symptoms are severe, sudden or rapidly worsening, seek urgent medical care. For ongoing concerns, arrange an appointment with a qualified clinician rather than relying on an app.</p>
+  </section>
+ </div>
+</main>
+<footer><div class="wrap">AI HealthMate • Prototype version 1.0<br>Not for diagnosis, treatment decisions, surgery recommendations or emergencies. No image analysis or AI medical model is connected in this demo.</div></footer>
+<script>
+const photo=document.getElementById('photo'), preview=document.getElementById('preview'), photoNote=document.getElementById('photoNote');
+let currentUrl='';
+photo.addEventListener('change',()=>{
+ const file=photo.files && photo.files[0];
+ if(currentUrl) URL.revokeObjectURL(currentUrl);
+ if(!file){preview.style.display='none';photoNote.style.display='none';return;}
+ if(!file.type.startsWith('image/')){alert('Please choose an image file.');photo.value='';return;}
+ currentUrl=URL.createObjectURL(file);preview.src=currentUrl;preview.style.display='block';photoNote.style.display='block';
+});
+document.getElementById('guidanceBtn').addEventListener('click',()=>{
+ const topic=document.getElementById('topic').value, details=document.getElementById('details').value.trim(), box=document.getElementById('guidance');
+ if(!topic){box.innerHTML='<strong>Please choose a topic first.</strong>';box.style.display='block';return;}
+ const messages={
+ 'Skin irritation or acne':'Use gentle, fragrance-free skin care if tolerated and avoid picking or harsh scrubs. A clinician can assess persistent, painful or worsening skin concerns.',
+ 'Sleep and daily routine':'A regular sleep and wake time, a calming bedtime routine and limiting late caffeine may help. Seek advice if sleep problems persist.',
+ 'Healthy eating':'Aim for variety across food groups and regular meals where possible. Avoid extreme diets or supplements unless recommended by a qualified professional.',
+ 'Stress and wellbeing':'Consider a short break, slow breathing, a supportive conversation or a manageable daily routine. If distress feels overwhelming, reach out to a trusted person or health professional.',
+ 'Exercise and movement':'Choose enjoyable, comfortable movement and build consistency gradually. Stop and seek medical advice if activity causes concerning symptoms.',
+ 'General health question':'For personal symptoms, diagnosis and treatment advice, a qualified healthcare professional who can assess you is the right person to consult.'
+ };
+ box.innerHTML='<h3>General information</h3><p>'+messages[topic]+'</p>'+(details?'<p><strong>Your note:</strong> '+escapeHtml(details)+'</p>':'')+'<p class="small">This is general education, not a personalised diagnosis.</p>';
+ box.style.display='block';
+});
+function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;"}[c]));}
+document.getElementById('bmiBtn').addEventListener('click',()=>{
+ const age=Number(document.getElementById('age').value), h=Number(document.getElementById('height').value), w=Number(document.getElementById('weight').value), box=document.getElementById('bmiResult');
+ box.style.display='block';
+ if(!age||!h||!w||h<=0||w<=0){box.textContent='Please enter a valid age, height and weight.';return;}
+ if(age<20){box.textContent='This adult BMI calculator is not intended for people under 20. A healthcare professional can interpret growth and health using age-appropriate methods.';return;}
+ const bmi=w/((h/100)**2);
+ box.innerHTML='<h3>Your BMI: '+bmi.toFixed(1)+'</h3><p>BMI is only one rough screening measure. It cannot determine your overall health or tell you whether you need to lose weight. Discuss personal results with a healthcare professional.</p>';
+});
+</script>
+</body>
+</html>
